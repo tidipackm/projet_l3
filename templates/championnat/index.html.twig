@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Championnat index{% endblock %}
+
+{% block body %}
+    <h1>Championnat index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Country</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for championnat in championnats %}
+            <tr>
+                <td>{{ championnat.id }}</td>
+                <td>{{ championnat.name }}</td>
+                <td>{{ championnat.country }}</td>
+                <td>
+                    <a href="{{ path('championnatController_app_championnat_show', {'id': championnat.id}) }}">Afficher</a>
+                    <a href="{{ path('championnatController_app_championnat_edit', {'id': championnat.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('championnatController_app_championnat_new') }}">Ajouter un nouveau championnat</a>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page Admin{% endblock %}
+
+
+
+
+
+{% block body %}
+    <main class="container">
+        <section class="row">
+            <div class="col-12">
+                {% for user in user%}
+                    {% if user.id == idUser %}
+                        <h1>{{user.pseudo}}</h1>
+                    {% endif %}
+                {% endfor %}
+                
+            </div>
+
+            <h2> Modifications possibles </h2>
+            
+            <div class="col-12">
+                    
+                <a class="nav-link" href="{{ path('championnatController_app_championnat_index') }}"> Modifications portant sur les championnats </a>
+
+            </div>
+
+            <div class="col-12">
+                    
+                <a class="nav-link" href="{{ path('equipeController_app_equipe_index') }}"> Modifications portant sur les équipes </a>
+
+            </div>
+
+            <div class="col-12">
+                    
+                <a class="nav-link" href="{{ path('joueurController_app_joueur_index') }}"> Modifications portant sur les joueurs </a>
+
+            </div>
+                    
+        </section>
+    </main>
+    
+{% endblock %}
+
+

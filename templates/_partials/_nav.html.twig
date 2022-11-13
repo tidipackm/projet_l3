@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-lg bg-light">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="{{ path('main') }}"> Your Mountakhab </a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						{% if app.user %}
+							<li class="nav-item">
+							{% if app.user.role != "admin" %}
+							
+								<a class="nav-link active" href="{{ path('profil_profil', {idUser: app.user.id}) }}" aria-current="page" href="#">Profil</a>
+							{% else %}
+								<a class="nav-link active" href="{{ path('admin_admin', {idUser: app.user.id}) }}" aria-current="page" href="#">Profil</a>
+							{% endif %}
+							</li>
+						{% endif %}
+						
+					</ul>
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						{% if app.user %}
+							<li class="nav-item">
+								<a class="nav-link" href="{{ path('app_logout') }}"> Se déconnecter </a>
+							</li>
+						
+						{% else %}
+							<li class="nav-item">
+								<a class="nav-link" href="{{ path('app_login') }}"> Se connecter </a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="{{ path('app_register') }}"> S'inscrire </a>
+							</li>
+						{% endif %}
+				</div>
+			</div>
+		</nav>

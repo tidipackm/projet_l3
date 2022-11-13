@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fiche Championnat{% endblock %}
+
+{% block body %}
+    {% for championnat in championnat%}
+                <div class="col-12">
+                    {% if championnat.id == idChamp %}
+                        <h1>{{championnat.name}}</h1>
+                    {% endif %}
+                {% endfor %}
+    
+
+    <h2>Equipes : </h2>
+   
+    <section class="container my-3">
+        <div class="row ">
+            <div class="col my-3">
+                {% for championnat in championnat%}
+                <div class="col-12">
+                    {% if championnat.id == idChamp %}
+                        <h1>Liste des équipes en {{championnat.name}} : </h1>
+                    {% endif %}
+                {% endfor %}
+                </div>     
+            </div>
+
+            <div>
+                {% for equipe in equipe%}
+                    <div class="col-12">
+                        {% if equipe.idChampionnat.id == idChamp %}
+                            
+                            <a class="nav-link" href="{{ path('ficheEquipe_fiche', {id: equipe.id}) }}"> {{ equipe.name }} </a>
+
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+    </section>
+{% endblock %}

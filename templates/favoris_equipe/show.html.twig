@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FavorisEquipe{% endblock %}
+
+{% block body %}
+    <h1>FavorisEquipe</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ favoris_equipe.id }}</td>
+            </tr>
+            <tr>
+                <th>IdEquipe</th>
+                <td>{{ favoris_equipe.idEquipe }}</td>
+            </tr>
+            <tr>
+                <th>IdUser</th>
+                <td>{{ favoris_equipe.idUser }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_favoris_equipe_index') }}">back to list</a>
+
+    <a href="{{ path('app_favoris_equipe_edit', {'id': favoris_equipe.id}) }}">edit</a>
+
+    {{ include('favoris_equipe/_delete_form.html.twig') }}
+{% endblock %}

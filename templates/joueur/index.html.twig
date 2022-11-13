@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Joueur index{% endblock %}
+
+{% block body %}
+    <h1>Joueur index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Number</th>
+                <th>Age</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for joueur in joueurs %}
+            <tr>
+                <td>{{ joueur.id }}</td>
+                <td>{{ joueur.name }}</td>
+                <td>{{ joueur.surname }}</td>
+                <td>{{ joueur.number }}</td>
+                <td>{{ joueur.age }}</td>
+                <td>
+                    <a href="{{ path('joueurController_app_joueur_show', {'id': joueur.id}) }}">Afficher</a>
+                    <a href="{{ path('joueurController_app_joueur_edit', {'id': joueur.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('joueurController_app_joueur_new') }}">Ajouter un nouveau joueur</a>
+{% endblock %}

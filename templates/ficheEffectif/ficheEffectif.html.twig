@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste de l'effectif {% endblock %}
+
+
+
+{% block body %}
+
+<h1> Liste de l'effectif  :</h1>
+    {% for joueur in joueur%}
+        <div class="col-12">
+            {% if joueur.idEquipe.id == idEquipe %}
+                <p>{{joueur.name}} {{joueur.surname}} n°{{joueur.number}}, âge : {{joueur.age}} ans</p>
+                {% if app.user %}
+                        <pre>
+                        </pre>
+                            {% set break = true %}
+                            {% for favorisJoueur in favorisJoueur %}
+                                {% if joueur.id == favorisJoueur.idJoueur%}
+                                    {% if app.user.id == favorisJoueur.idUser%}
+                                        {% set break = false %}
+                                            <form method="post" action="{{ path('app_favoris_joueur_delete', {'id': favorisJoueur.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ favorisJoueur.id) }}">
+                                                <button class="btn">Supprimer des favoris</button>
+                                            </form>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                            {% if break %}
+                                <a class="nav-link" href="{{ path('ficheEffectif_ajoutFavoris', {idJoueur: joueur.id, idUser: app.user.id, id: idEquipe}) }}">Ajouter aux favoris</a>  
+                            {% endif %} 
+                {% endif %}
+                <p> - - - - - - - - - - - - - </p>
+            {% endif %}
+        </div>
+    {% endfor %}
+
+    
+{% endblock %}

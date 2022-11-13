@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Equipe{% endblock %}
+
+{% block body %}
+    <h1>Creer une nouvelle equipe</h1>
+
+    {{ include('equipe/_form.html.twig') }}
+
+    <a href="{{ path('equipeController_app_equipe_index') }}">Retour à la liste des équipes</a>
+{% endblock %}

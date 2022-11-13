@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FavorisEquipe index{% endblock %}
+
+{% block body %}
+    <h1>FavorisEquipe index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>IdEquipe</th>
+                <th>IdUser</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for favoris_equipe in favoris_equipes %}
+            <tr>
+                <td>{{ favoris_equipe.id }}</td>
+                <td>{{ favoris_equipe.idEquipe }}</td>
+                <td>{{ favoris_equipe.idUser }}</td>
+                <td>
+                    <a href="{{ path('app_favoris_equipe_show', {'id': favoris_equipe.id}) }}">show</a>
+                    <a href="{{ path('app_favoris_equipe_edit', {'id': favoris_equipe.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_favoris_equipe_new') }}">Create new</a>
+{% endblock %}

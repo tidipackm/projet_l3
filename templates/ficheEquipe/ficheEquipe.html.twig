@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fiche Equipe{% endblock %}
+
+{% block body %}
+    {% for equipe in equipe%}
+                <div class="col-12">
+                    {% if equipe.id == idEquipe %}
+                        <h1>{{equipe.name}}</h1>
+                        <a class="nav-link" href="{{ path('ficheEffectif_fiche', {id: idEquipe}) }}"> Voir l'effectif </a>
+                        {% if app.user %}
+                            {% set break = true %}
+                            {% for favorisEquipe in favorisEquipe %}
+                                {% if equipe.id == favorisEquipe.idEquipe%}
+                                    {% if app.user.id == favorisEquipe.idUser%}
+                                        {% set break = false %} 
+                                            <form method="post" action="{{ path('app_favoris_equipe_delete', {'id': favorisEquipe.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ favorisEquipe.id) }}">
+                                                <button class="btn">Supprimer de mes équipes favorites</button>
+                                            </form>            
+                                                                       
+                                    {% else %}
+                                    {% endif %}
+                                {% else %}
+                                {% endif %}
+                            {% endfor %}    
+
+                            {% if break %}
+                                <a class="nav-link" href="{{ path('ficheEquipe_ajouterFavoris', {idEquipe: equipe.id, idUser: app.user.id, id: idEquipe}) }}">Ajouter aux favoris</a>
+                            {% endif %}                               
+                        {% endif %}
+                        {% else %}
+                    {% endif %}
+    {% endfor %}
+    
+
+
+<div class="modal shadow-1 white modal-falling" id="modal-example" data-ax="modal">
+  <div class="modal-header">Header</div>
+
+  <div class="divider"></div>
+
+  <div class="modal-content">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores dolorum eum in totam amet soluta! Id distinctio iusto
+    voluptatum ipsam officia, odit neque, fuga, commodi totam repellendus deserunt quod laborum? Lorem ipsum dolor sit amet consectetur
+    adipisicing elit. Assumenda nostrum doloribus quisquam minima minus animi voluptatum illo illum. Vel, labore iure aut sed nobis
+    officiis itaque molestias rerum natus vero. <br />
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores dolorum eum in totam amet soluta! Id distinctio iusto
+    voluptatum ipsam officia, odit neque, fuga, commodi totam repellendus deserunt quod laborum? Lorem ipsum dolor sit amet consectetur
+    adipisicing elit. Assumenda nostrum doloribus quisquam minima minus animi voluptatum illo illum. Vel, labore iure aut sed nobis
+    officiis itaque molestias rerum natus vero.
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="modal-footer">
+    <button data-target="modal-example" class="ml-auto btn shadow-1 rounded-1 btn-small primary">Close</button>
+  </div>
+</div>
+
+
+    <h2>Palmares : </h2>
+   
+    <section class="container my-3">
+        <div class="row ">
+            <div class="col my-3">
+                {% for palmares in palmares%}
+                <div class="col-12">
+                    {% if palmares.idEquipe.id == idEquipe %}
+                        <h1>Nombre de championnats remportés : {{palmares.nbChampionnat}}</h1>
+                        <h1>Nombre de Coupes nationales remportés : {{palmares.nbCup}}</h1>
+                        <h1>Nombre de Ligues des Champions remportées : {{palmares.nbCl}}</h1>
+                        <h1>Nombre de Ligue Europa : {{palmares.nbEl}}</h1>
+                    {% endif %}
+                {% endfor %}
+                </div>     
+            </div>
+
+            
+    </section>
+
+{% endblock %}
